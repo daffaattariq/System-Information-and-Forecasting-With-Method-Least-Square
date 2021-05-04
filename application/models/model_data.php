@@ -40,7 +40,7 @@ class Model_Data extends CI_Model
 			$query=$this->db->get();			
 			$data= $query->result_array();
 			// print_r($data);
-			print_r($this->db->last_query()); 
+			// print_r($this->db->last_query()); 
 			return $data;
 		}
 		function ambil_data_detail_loading ($where)
@@ -59,6 +59,22 @@ class Model_Data extends CI_Model
 			print_r($this->db->last_query()); 
 			return $data;
 		}
+		function ambil_data_penjualan_varian ($where)
+		{
+			$this->db->select('detail_loading.id_detail_loading , produk.nama_produk, varian.jenis_varian , sum(detail_loading.jumlah_pesanan) as total');
+			$this->db->from('loading_barang');			
+			$this->db->join('detail_loading','detail_loading.id_loading=loading_barang.id_loading');
+			$this->db->join('varian','varian.id_varian=detail_loading.id_varian');
+			$this->db->join('produk','produk.id_produk=varian.id_produk');	
+			$this->db->join('wilayah_distributor','wilayah_distributor.id_wilayah_distributor=loading_barang.id_wilayah_distributor');
+			$this->db->where($where);
+			$this->db->group_by('detail_loading.id_varian');
+			$query=$this->db->get();			
+			$data= $query->result_array();
+			// print_r($data);
+			print_r($this->db->last_query()); 
+			return $data;
+		}
 		function ambil_data_sales ($where)
 		{
 			$this->db->select('*');
@@ -68,12 +84,17 @@ class Model_Data extends CI_Model
 			$query=$this->db->get();			
 			$data= $query->result_array();
 			// print_r($data);
-			print_r($this->db->last_query()); 
+			// print_r($this->db->last_query()); 
 			return $data;
 		}
 		function ambil_data_produk($where_produk)
 		{
 			$query = $this->db->get_where('produk',$where_produk);			
+			return $query->result_array();
+		}
+		function ambil_data_where($table,$where_produk)
+		{
+			$query = $this->db->get_where($table,$where_produk);			
 			return $query->result_array();
 		}
 		function delete_varian($where,$table)
@@ -96,6 +117,29 @@ class Model_Data extends CI_Model
 		{
 			$this->db->where($where);
 			$this->db->delete($table);
+		}
+
+		//PERAMALAN
+		function ambil_data_peramalan($tgl_input , $list_id_varian)
+		{
+			
+
+			$sql = "SELECT `detail_loading`.`id_detail_loading`, `produk`.`nama_produk`, `varian`.`jenis_varian`, sum(detail_loading.jumlah_pesanan) as total ,
+			YEAR(loading_barang.tgl_loading) as year , MONTH(loading_barang.tgl_loading) as month
+			FROM `loading_barang` 
+			JOIN `detail_loading` ON `detail_loading`.`id_loading`=`loading_barang`.`id_loading` 
+			JOIN `varian` ON `varian`.`id_varian`=`detail_loading`.`id_varian` 
+			JOIN `produk` ON `produk`.`id_produk`=`varian`.`id_produk` 
+			JOIN `wilayah_distributor` ON `wilayah_distributor`.`id_wilayah_distributor`=`loading_barang`.`id_wilayah_distributor` 
+			WHERE loading_barang.tgl_loading 
+			BETWEEN DATE_ADD('$tgl_input', INTERVAL -7 MONTH) AND '$tgl_input'
+			AND `loading_barang`.`id_wilayah_distributor` = '1' AND `loading_barang`.`is_deleted` = 0 
+			AND `varian`.`id_varian`= $list_id_varian
+			GROUP BY `detail_loading`.`id_varian` , YEAR(loading_barang.tgl_loading ) ,MONTH(loading_barang.tgl_loading)";
+			$result = $this->db->query($sql);
+			$data= $result->result_array();
+			print_r($this->db->last_query()); 
+			return $data;
 		}
 
 		//AKSI LOG

@@ -237,8 +237,7 @@ class Aksi_Admin_Varian extends CI_Controller
         //AKSI LOG VARIAN
 
         $data_insert_log = array(            
-            'id_varian'  => $id_varian,
-            'id_wilayah_distributor' => $this->session->userdata('id_wilayah_distributor'),
+            'id_varian'  => $id_varian,            
             'aksi'     => "Hapus Permanent"            
         );
 

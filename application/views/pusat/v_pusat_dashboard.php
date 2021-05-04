@@ -67,32 +67,7 @@
               </div>
             </div>
           
-                     <!-- Earnings (Annual) Card Example -->
-            <div class="col-xl-2 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/admin/list_data_employee')?>">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">              
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Data Penjualan</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">Preview</div>
-                    
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
-                    </div>
-                  </div>
-                </a>
-                </div>
-              </div>
-            </div>
-            
 
-           
-
-               
 
 
             

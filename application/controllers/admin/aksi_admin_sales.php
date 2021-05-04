@@ -17,12 +17,6 @@ class Aksi_Admin_Sales extends CI_Controller
         );
                
         $ambil_data['data'] = $this->model_data->ambil_data_sales($where);        
-
-        if(!empty($ambil_data['data'][0]['id_wilayah_distributor']))
-        {
-            // $ambil_data['id_wilayah_distributor'] = $ambil_data['data'][0]['id_wilayah_distributor'];
-            $ambil_data['nama_wilayah'] = $ambil_data['data'][0]['nama_wilayah'];
-        }
         
         // print($ambil_data['produk'][0]['id_produk']);die();
 

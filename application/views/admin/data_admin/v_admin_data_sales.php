@@ -119,13 +119,7 @@
                         placeholder="nama sales"required="" name="nama_sales" >
                     </div>
                    
-                    <div class="form-group">
-                    <label for="exampleFormControlSelect1">Wilayah</label>
-                      <input type="text" class="form-control" id="exampleFormControlInput1"
-                     
-                        value="<?php echo $nama_wilayah ?>" required="" name="wilayah" disabled>
-                       
-                    </div>
+                   
                 
 
                 </div>

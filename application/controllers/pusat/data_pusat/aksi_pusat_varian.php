@@ -28,7 +28,7 @@ class Aksi_Pusat_Varian extends CI_Controller {
 
         $this->load->view('pusat/v_pusat_side_navbar'  , $data_wilayah);        
         $this->load->view('pusat/v_pusat_top_navbar');         
-        $this->load->view('pusat/data/v_pusat_data_product' , $ambil_data);	
+        $this->load->view('pusat/data/v_pusat_data_varian' , $ambil_data);	
 
         //PRODUCT
         

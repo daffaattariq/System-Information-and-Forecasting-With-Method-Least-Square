@@ -15,17 +15,17 @@ class Aksi_Admin_Loading extends CI_Controller
             'loading_barang.id_wilayah_distributor' => $id_wilayah_distributor,
             'loading_barang.is_deleted' => 0
         );
+
+        $where_sales = array(
+            'sales.id_wilayah_distributor' => $id_wilayah_distributor,
+            'sales.is_deleted' => 0
+        );
                
         $ambil_data['data'] = $this->model_data->ambil_data_loading_barang($where);
-        $ambil_data['sales'] = $this->model_data->ambil_data_result('sales');
+        $ambil_data['sales'] = $this->model_data->ambil_data_sales($where_sales);
 
-        if(!empty($ambil_data['data'][0]['id_wilayah_distributor']))
-        {
-            // $ambil_data['id_wilayah_distributor'] = $ambil_data['data'][0]['id_wilayah_distributor'];
-            $ambil_data['nama_wilayah'] = $ambil_data['data'][0]['nama_wilayah'];
-        }
-        
-        // print($ambil_data['produk'][0]['id_produk']);die();
+    
+        // print($ambil_data['produk'][0]['id_produk']);die();        
 
         //tampil
         $this->load->view('admin/v_admin_side_navbar');        
@@ -38,9 +38,11 @@ class Aksi_Admin_Loading extends CI_Controller
     {        
         $id_sales      = $this->input->post('list_id_sales');
         $id_wilayah_distributor        = $this->session->userdata('id_wilayah_distributor');
+        $date = date("y-m-d");        
 
         $data_insert = array(            
             'id_sales'     => $id_sales,
+            'tgl_loading' => $date,
             'id_wilayah_distributor' => $id_wilayah_distributor
         );
 

@@ -5,7 +5,7 @@
   <title>Form Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <link rel="shortcut icon" href="<?php echo base_url();?>assets/images/logosisi.png">
+   <link rel="shortcut icon" href="<?php echo base_url();?>assets/images/bintang_sidoraya.jpg">
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
@@ -28,6 +28,19 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/css/flaticon.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/css/icomoon.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css">
+
+  <style>
+    html,
+        body {
+            height: 100%;
+        }
+        body {
+            
+  
+            
+            background-image: linear-gradient(-225deg, rgb(255, 255, 255) 50%, rgb(16,12,44) 50%);
+        }
+    </style>
 </head>
 
 <body>

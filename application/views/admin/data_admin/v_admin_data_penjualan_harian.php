@@ -15,57 +15,68 @@
   <link href="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
-<body id="page-top">
-  <div id="wrapper">
-        <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-           
-            <h1 class="h3 mb-0 text-gray-800">DataTables Sales   </h1>
-           
-            <ol class="breadcrumb">
-          
-            
-          </div>
 
           <!-- Row -->
           <div class="row">
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
+                
                 <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                <br>
+
+                <form action="<?php echo base_url('admin/aksi_admin_penjualan/aksi_harian_penjualan') ?>" method="post">
+                <label>Pilih Tanggal</label>
+                <br>
+                <?php
+                if(!empty($tgl_pilih))
+                {                    
+                ?>
+                    <input type="date" name="tgl_harian" value="<?php echo $tgl_pilih ?>">
+                <?php
+                }
+                else
+                {
+                ?>
+                    <input type="date" name="tgl_harian" value="<?php echo date("Y-m-d") ?>" >
+                <?php
+                }
+                ?>
+              
+                <button type="submit" class="btn btn-primary">Submit</button>                
+                </form>
+                
+                  <table class="table align-items-center table-flush table-hover" id="dataTable">
                     <thead class="thead-light">
                       <tr>
-                        <th>Number</th>                                                   
-                        <th>Nama Sales</th>                   
-                        <th>Wilayah</th>                                                                        
-                        
+                        <th>Number</th>                                                
+                        <th>Tgl Loading</th>                                                                                        
+                        <th>Sales</th> 
+                        <th>Customer</th> 
+                        <th>Varian</th> 
+                        <th>Produk</th> 
+                        <th>Jumlah Pesanan</th>                         
+                        <th>Total</th>                                           
                       </tr>
                     </thead>
-                   <!--  <tfoot>
-                    <tr>
-                        <th>Id Employee</th>
-                        <th>Full Name</th>
-                        <th>Username</th>
-                        <th>Division</th>
-                        <th>Password</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot> -->
+
                     <tbody>
                       <?php
                         $number = 0;
 
-                        foreach($data as $data_sales)
+                        foreach($data as $data_detail_loading)
                         {
-                          $number++;
-                        
+                          $number++;                        
                       ?>
                         <tr>
-                            <td><?php echo $number ?></td>                            
-                            <td><?php echo $data_sales['nama_sales'] ?></td>
-                            <td><?php echo $data_sales['nama_wilayah'] ?></td>                                                         
+                            <td><?php echo $number ?></td>                                                        
+                            <td><?php echo $data_detail_loading['tgl_loading'] ?></td>  
+                            <td><?php echo $data_detail_loading['nama_sales'] ?></td>                                                        
+                            <td><?php echo $data_detail_loading['customer'] ?></td>
+                            <td><?php echo $data_detail_loading['jenis_varian'] ?></td>
+                            <td><?php echo $data_detail_loading['nama_produk'] ?></td>                            
+                            <td align="center"><?php echo $data_detail_loading['jumlah_pesanan'] ?></td>
+                            <td><?php echo $data_detail_loading['total'] ?></td>    
                            
                         </tr>
                       <?php
@@ -89,8 +100,7 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-    <!-- modal tambah members -->
-      
+    
     </body>
 
   <script src="<?php echo base_url();?>assets/admin/vendor/jquery/jquery.min.js"></script>

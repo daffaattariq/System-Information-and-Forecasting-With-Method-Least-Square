@@ -18,6 +18,7 @@ class Aksi_Admin_Detail_Loading extends CI_Controller
 
         $id_wilayah_distributor = $this->session->userdata('id_wilayah_distributor');                  
         
+        //where detail_loading
         $where = array(
             'detail_loading.id_loading' => $id_loading,
             'loading_barang.id_wilayah_distributor' => $id_wilayah_distributor,
@@ -30,9 +31,14 @@ class Aksi_Admin_Detail_Loading extends CI_Controller
             'loading_barang.id_wilayah_distributor' => $id_wilayah_distributor,
             'loading_barang.is_deleted' => 0
         );
+
+        $where_varian = array(
+            'id_wilayah_distributor' => $id_wilayah_distributor,
+            'is_deleted' => 0
+        );
                
         $ambil_data['data'] = $this->model_data->ambil_data_detail_loading($where);   
-        $ambil_data['varian'] = $this->model_data->ambil_data_result('varian');    
+        $ambil_data['varian'] = $this->model_data->ambil_data_where('varian',$where_varian);    
         $ambil_data['data_loading'] =  $this->model_data->ambil_data_loading_barang($where_data_loading);
 
         

@@ -21,7 +21,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <img class="img-profile rounded-circle" src="<?php echo base_url();?>assets/admin/img/boy.png" style="max-width: 60px">
-                <span class="ml-2 d-none d-lg-inline text-white small">hello admin, <?php echo $this->session->userdata('id_wilayah_distributor') ?></span>
+                <span class="ml-2 d-none d-lg-inline text-white small">hello Pusat, <?php echo $this->session->userdata('id_wilayah_distributor') ?></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                

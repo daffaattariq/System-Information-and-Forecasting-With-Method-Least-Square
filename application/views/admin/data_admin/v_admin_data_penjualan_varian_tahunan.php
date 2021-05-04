@@ -12,60 +12,71 @@
   <link href="<?php echo base_url();?>assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url();?>assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url();?>assets/admin/css/ruang-admin.min.css" rel="stylesheet">
-  <link href="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">  
 </head>
 
-<body id="page-top">
-  <div id="wrapper">
-        <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-           
-            <h1 class="h3 mb-0 text-gray-800">DataTables Sales   </h1>
-           
-            <ol class="breadcrumb">
-          
-            
-          </div>
 
           <!-- Row -->
           <div class="row">
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
+                
                 <div class="table-responsive p-3">
+                <br>
+
+                <form action="<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian_tahunan') ?>" method="post">
+                
+                <br>
+                
+
+                <div class="form-group">
+                      <label for="exampleFormControlSelect1">Choose Tahun</label>
+                       <select class="form-control" id="exampleFormControlSelect1" name="list_tahun">                        
+                            <?php
+                                if(!empty($list_tahun))
+                                {
+                            ?>
+                                <option selected="selected" value="<?php echo $list_tahun ?>"><?php echo $list_tahun ?></option>                              
+                            <?php    
+                                }
+                            ?>                                    
+                           <option value="2018">2018</option>
+                           <option value="2019">2019</option>
+                           <option value="2020">2020</option>
+                           <option value="2021">2021</option>
+                       </select>
+                </div>                
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>   
+                <br>             
+                </form>
+                
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>Number</th>                                                   
-                        <th>Nama Sales</th>                   
-                        <th>Wilayah</th>                                                                        
-                        
+                        <th>Number</th>                                                
+                        <th>Nama Produk</th>                                                                                        
+                        <th>Jenis Varian</th> 
+                        <th>Total</th> 
+                                                               
                       </tr>
                     </thead>
-                   <!--  <tfoot>
-                    <tr>
-                        <th>Id Employee</th>
-                        <th>Full Name</th>
-                        <th>Username</th>
-                        <th>Division</th>
-                        <th>Password</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot> -->
+
                     <tbody>
                       <?php
                         $number = 0;
 
-                        foreach($data as $data_sales)
+                        foreach($data as $data_detail_loading)
                         {
-                          $number++;
-                        
+                          $number++;                        
                       ?>
                         <tr>
-                            <td><?php echo $number ?></td>                            
-                            <td><?php echo $data_sales['nama_sales'] ?></td>
-                            <td><?php echo $data_sales['nama_wilayah'] ?></td>                                                         
+                            <td><?php echo $number ?></td>                                                        
+                            <td><?php echo $data_detail_loading['nama_produk'] ?></td>  
+                            <td><?php echo $data_detail_loading['jenis_varian'] ?></td>                                                        
+                            <td><?php echo $data_detail_loading['total'] ?></td>
+                            
                            
                         </tr>
                       <?php
@@ -89,8 +100,7 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-    <!-- modal tambah members -->
-      
+    
     </body>
 
   <script src="<?php echo base_url();?>assets/admin/vendor/jquery/jquery.min.js"></script>

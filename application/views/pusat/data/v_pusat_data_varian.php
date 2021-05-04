@@ -21,11 +21,11 @@
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
            
-            <h1 class="h3 mb-0 text-gray-800">DataTables Sales   </h1>
+            <h1 class="h3 mb-0 text-gray-800">DataTables Varian  </h1>
            
             <ol class="breadcrumb">
           
-            
+             
           </div>
 
           <!-- Row -->
@@ -37,10 +37,13 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>Number</th>                                                   
-                        <th>Nama Sales</th>                   
-                        <th>Wilayah</th>                                                                        
-                        
+                        <th>Number</th>                        
+                        <th>Tipe Varian</th>                       
+                        <th>Stock Varian</th>
+                        <th>Jenis Varian</th>
+                        <th>Harga Varian</th>
+                        <th>Wilayah</th>
+
                       </tr>
                     </thead>
                    <!--  <tfoot>
@@ -57,16 +60,20 @@
                       <?php
                         $number = 0;
 
-                        foreach($data as $data_sales)
+                        foreach($data as $data_stock)
                         {
                           $number++;
                         
                       ?>
                         <tr>
                             <td><?php echo $number ?></td>                            
-                            <td><?php echo $data_sales['nama_sales'] ?></td>
-                            <td><?php echo $data_sales['nama_wilayah'] ?></td>                                                         
-                           
+                            <td><?php echo $data_stock['jenis_varian'] ?></td>
+                            <td><?php echo $data_stock['stock_varian'] ?></td>
+                            <td><?php echo $data_stock['nama_produk'] ?></td>
+                            <td><?php echo $data_stock['harga_varian'] ?></td>
+                            <td><?php echo $data_stock['nama_wilayah'] ?></td>
+
+                          
                         </tr>
                       <?php
                         }
@@ -90,7 +97,8 @@
     <i class="fas fa-angle-up"></i>
   </a>
     <!-- modal tambah members -->
-      
+        
+        
     </body>
 
   <script src="<?php echo base_url();?>assets/admin/vendor/jquery/jquery.min.js"></script>

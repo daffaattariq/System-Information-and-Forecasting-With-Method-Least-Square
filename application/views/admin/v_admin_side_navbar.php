@@ -88,12 +88,28 @@
               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap3"
                 aria-expanded="true" aria-controls="collapseBootstrap">
                 <i class="far fa-fw fa-window-maximize"></i>
-                <span>Peramalan</span>
+                <span>Penjualan</span>
               </a>
               <div id="collapseBootstrap3" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                   
-                <a class="collapse-item" href="<?php echo base_url('admin/aksi_peramalan') ?>?id_wilayah_distributor=<?php echo $this->session->userdata('id_wilayah_distributor') ?>" > Data Peramalan</a>                
+                <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_penjualan') ?>?id_wilayah_distributor=<?php echo $this->session->userdata('id_wilayah_distributor') ?>" > Data Penjualan</a>                
+                <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian') ?>?id_wilayah_distributor=<?php echo $this->session->userdata('id_wilayah_distributor') ?>" > Data Penjualan Varian</a>                
+
+                </div>
+              </div>
+            </li>     
+
+            <li class="nav-item active">
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap4"
+                aria-expanded="true" aria-controls="collapseBootstrap">
+                <i class="far fa-fw fa-window-maximize"></i>
+                <span>Peramalan</span>
+              </a>
+              <div id="collapseBootstrap4" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                  
+                <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_peramalan') ?>?id_wilayah_distributor=<?php echo $this->session->userdata('id_wilayah_distributor') ?>" > Data Peramalan</a>                
 
                 </div>
               </div>

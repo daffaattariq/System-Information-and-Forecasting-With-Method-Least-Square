@@ -50,10 +50,15 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                   
                   <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_varian') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Product</a>
-                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_sales') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Sales</a>
+                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_sales') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Sales</a>     
+                  <!-- LOG -->
+                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_log_varian') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Log Product</a>
+                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_log_sales') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Log Sales</a>     
 
                 </div>
               </div>
+
+              
             </li>
       
       <?php

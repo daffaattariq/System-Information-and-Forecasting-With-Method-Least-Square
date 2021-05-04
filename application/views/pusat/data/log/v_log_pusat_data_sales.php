@@ -21,11 +21,11 @@
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
            
-            <h1 class="h3 mb-0 text-gray-800">DataTables Sales   </h1>
+            <h1 class="h3 mb-0 text-gray-800">DataTables Log Sales  </h1>
            
             <ol class="breadcrumb">
           
-            
+             
           </div>
 
           <!-- Row -->
@@ -37,10 +37,10 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>Number</th>                                                   
-                        <th>Nama Sales</th>                   
-                        <th>Wilayah</th>                                                                        
-                        
+                        <th>Number</th>
+                        <th>Tanggal Aksi</th>                        
+                        <th>Nama Sales</th>                                               
+                        <th>Action</th>
                       </tr>
                     </thead>
                    <!--  <tfoot>
@@ -64,9 +64,10 @@
                       ?>
                         <tr>
                             <td><?php echo $number ?></td>                            
-                            <td><?php echo $data_sales['nama_sales'] ?></td>
-                            <td><?php echo $data_sales['nama_wilayah'] ?></td>                                                         
-                           
+                            <td><?php echo $data_sales['tgl_aksi'] ?></td>
+                            <td><?php echo $data_sales['nama_sales'] ?></td>                            
+                            <td><?php echo $data_sales['aksi'] ?></td>
+                   
                         </tr>
                       <?php
                         }
@@ -89,8 +90,7 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-    <!-- modal tambah members -->
-      
+   
     </body>
 
   <script src="<?php echo base_url();?>assets/admin/vendor/jquery/jquery.min.js"></script>
