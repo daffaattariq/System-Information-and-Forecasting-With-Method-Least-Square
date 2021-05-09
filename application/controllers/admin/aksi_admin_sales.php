@@ -2,6 +2,15 @@
 
 class Aksi_Admin_Sales extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        if(!$this->session->userdata('username'))
+        {
+            redirect('login');
+        }
+    }
+    
     function index()
     {        
     	redirect('admin/aksi_admin_sales/tampil_sales');
@@ -30,7 +39,14 @@ class Aksi_Admin_Sales extends CI_Controller
     
     function tambah_sales()
     {        
-        $nama_sales      = $this->input->post('nama_sales');
+        $this->form_validation->set_rules('nama_sales','is_unique[sales.nama_sales]');
+        if($this->form_validation->run()==false)
+        {
+            $this->session->set_flashdata('error', 'nama sales sudah ada');
+            redirect('admin/aksi_admin_sales/tampil_sales');
+        }
+        else{
+            $nama_sales      = $this->input->post('nama_sales');
         $id_wilayah_distributor        = $this->session->userdata('id_wilayah_distributor');
 
         $data_insert = array(            
@@ -52,6 +68,10 @@ class Aksi_Admin_Sales extends CI_Controller
          $this->model_data->insert($data_insert_log,'log_sales');
  
         redirect('admin/aksi_admin_sales' );
+        }
+
+
+        
     }
 
     function hapus_sales()

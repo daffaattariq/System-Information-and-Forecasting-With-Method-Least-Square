@@ -13,6 +13,9 @@
   <link href="<?php echo base_url();?>assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url();?>assets/admin/css/ruang-admin.min.css" rel="stylesheet">
   <link href="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <!-- untuk search -->
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/css/select2.css">
 </head>
 
 <body id="page-top">
@@ -109,6 +112,7 @@
     <!-- modal tambah members -->
         <div class="modal fade" id="tambahmembers" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <link rel="stylesheet" href="<?php echo base_url();?>assets/css/select2.css">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -127,7 +131,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleFormControlSelect1">Select Sales</label>
-                      <select class="form-control" id="exampleFormControlSelect1" name="list_id_sales">
+                      <select class="form-control select2bs4" id="exampleFormControlSelect1" name="list_id_sales">
                         <?php
   
                           foreach($sales as $data_sales)
@@ -171,6 +175,17 @@
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
+  </script>
+
+  <!-- UNTUK SEARCH -->
+  <script src="<?php echo base_url();?>assets/css/select2.full.min.js"></script>
+
+  <script>
+      $(function (){
+          $('.select2bs4').select2({
+              theme: 'bootstrap4'
+          })
+      })
   </script>
 
 </body>

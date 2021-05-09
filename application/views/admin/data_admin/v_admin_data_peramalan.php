@@ -135,8 +135,10 @@
                         $total_nilai_x2y = 0;
 
                         $count_jumlah_data = count($nilai_x);
-                        
-                        foreach($data_peramalan as $data_peramalan)
+                        // echo "<pre>";
+                        //  print_r($data_peramalans);
+                         
+                        foreach($data_peramalan as $number => $data_peramalan)
                         {
                           $number++;                        
                       ?>
@@ -147,7 +149,7 @@
                             <td><?php echo $data_peramalan['total'] ?></td> 
 
                             <?php
-                              if($count_jumlah_data > 6)
+                              if($count_jumlah_data > 19)
                               {
                             ?>
                               <!-- nilai x -->
@@ -165,23 +167,23 @@
                             ?>
                         </tr>
                       <?php
-                          if($count_jumlah_data > 6)
+                          if($count_jumlah_data > 19)
                           {
                             $total_nilai_y = $total_nilai_y + $data_peramalan['total'];
                             $total_nilai_x2 = $total_nilai_x2 + $nilai_x[$number-1]*$nilai_x[$number-1];
                             $total_nilai_x4 = $total_nilai_x4 + $nilai_x[$number-1]*$nilai_x[$number-1]*$nilai_x[$number-1]*$nilai_x[$number-1];
                             $total_nilai_xy = $total_nilai_xy + $nilai_x[$number-1]*$data_peramalan['total'];
                             $total_nilai_x2y = $total_nilai_x2y + $nilai_x[$number-1]*$nilai_x[$number-1]*$data_peramalan['total'];
-                            $total_8 = $data_peramalan['total'];
+                            // $total_8 = $data_peramalan['total'];
                           }
                         }//tutup foreach
 
-                        if($count_jumlah_data > 6)
+                        if($count_jumlah_data > 19)
                         {
-                          $total_nilai_y = $total_nilai_y - $total_8;
+                          // $total_nilai_y = $total_nilai_y - $total_8;
                         }
 
-                        if($count_jumlah_data > 6)
+                        if($count_jumlah_data > 19)
                         {
                       ?>
                       <tr>
@@ -200,11 +202,13 @@
                   <br>
                   <br>
                   <?php
-                        $a = (($total_nilai_x4*$total_nilai_y)-($total_nilai_x2*$total_nilai_x2y)) / (7*($total_nilai_x4)-7*($total_nilai_x2*$total_nilai_x2y));
+                  $n = 11;
+                  $x_indeks = 6; //4
+                        $a = (($total_nilai_x4*$total_nilai_y)-($total_nilai_x2*$total_nilai_x2y)) / ($n*($total_nilai_x4)-$n*($total_nilai_x2*$total_nilai_x2));
                         $b = $total_nilai_xy/$total_nilai_x2;
-                        $c = ((7*$total_nilai_x2y) - ($total_nilai_x2*$total_nilai_y)) / ((7*$total_nilai_x4) - ($total_nilai_x2*$total_nilai_x2));
+                        $c = (($n*$total_nilai_x2y) - ($total_nilai_x2*$total_nilai_y)) / (($n*$total_nilai_x4) - ($total_nilai_x2*$total_nilai_x2));
 
-                        $hasil =ceil($a+($b*4)+($c*4*4));
+                        $hasil =ceil($a+($b*$x_indeks)+($c*$x_indeks*$x_indeks));
                   ?>
                   <h2>PERHITUNGAN</h2>
                   <br>
@@ -251,12 +255,12 @@
   <script src="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script>
+  <!-- <script>
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
-  </script>
+  </script> -->
 
 </body>
 

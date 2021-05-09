@@ -2,6 +2,14 @@
 
 class Aksi_Admin_Penjualan extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        if(!$this->session->userdata('username'))
+        {
+            redirect('login');
+        }
+    }
     function index()
     {        
     	redirect('admin/aksi_admin_penjualan/tampil_penjualan');

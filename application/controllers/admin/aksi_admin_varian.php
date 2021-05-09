@@ -2,6 +2,14 @@
 
 class Aksi_Admin_Varian extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        if(!$this->session->userdata('username'))
+        {
+            redirect('login');
+        }
+    }
     function index()
     {        
     	$this->load->view('admin/v_admin_side_navbar' );        
@@ -46,6 +54,14 @@ class Aksi_Admin_Varian extends CI_Controller
 
     function tambah_varian()
     {
+        $this->form_validation->set_rules('jenis_varian','is_unique[sales.nama_sales]');
+        if($this->form_validation->run()==false)
+        {
+            $this->session->set_flashdata('error', 'Tipe jenis sudah ada');
+            redirect('admin/aksi_admin_varian/tampil_data_stock' );
+        }
+        else
+        {
         $jenis_varian   = $this->input->post('jenis_varian');
         $stock_varian   = $this->input->post('stock_varian');
         $harga_varian   = $this->input->post('harga_varian');
@@ -73,6 +89,7 @@ class Aksi_Admin_Varian extends CI_Controller
         $this->model_data->insert($data_insert_log,'log_varian');
 
         redirect('admin/aksi_admin_varian/tampil_data_stock' );
+        }
     }
 
     function hapus_varian()

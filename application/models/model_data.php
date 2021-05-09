@@ -120,27 +120,51 @@ class Model_Data extends CI_Model
 		}
 
 		//PERAMALAN
-		function ambil_data_peramalan($tgl_input , $list_id_varian)
+		function ambil_data_peramalan($tgl_input , $list_id_varian, $tgl_calculated)
 		{
 			
 
-			$sql = "SELECT `detail_loading`.`id_detail_loading`, `produk`.`nama_produk`, `varian`.`jenis_varian`, sum(detail_loading.jumlah_pesanan) as total ,
-			YEAR(loading_barang.tgl_loading) as year , MONTH(loading_barang.tgl_loading) as month
+			$sql = "SELECT `detail_loading`.`id_detail_loading`, `produk`.`nama_produk`, 
+			`varian`.`jenis_varian`, sum(detail_loading.jumlah_pesanan) as total , 
+			YEAR(loading_barang.tgl_loading) as year , MONTH(loading_barang.tgl_loading) as month 
 			FROM `loading_barang` 
 			JOIN `detail_loading` ON `detail_loading`.`id_loading`=`loading_barang`.`id_loading` 
 			JOIN `varian` ON `varian`.`id_varian`=`detail_loading`.`id_varian` 
 			JOIN `produk` ON `produk`.`id_produk`=`varian`.`id_produk` 
 			JOIN `wilayah_distributor` ON `wilayah_distributor`.`id_wilayah_distributor`=`loading_barang`.`id_wilayah_distributor` 
-			WHERE loading_barang.tgl_loading 
-			BETWEEN DATE_ADD('$tgl_input', INTERVAL -7 MONTH) AND '$tgl_input'
-			AND `loading_barang`.`id_wilayah_distributor` = '1' AND `loading_barang`.`is_deleted` = 0 
-			AND `varian`.`id_varian`= $list_id_varian
+			WHERE loading_barang.tgl_calculated 
+			BETWEEN Date_format(DATE_ADD('$tgl_input', INTERVAL -20 MONTH),'%Y%m') AND '$tgl_calculated' 
+			AND `loading_barang`.`id_wilayah_distributor` = '1' 
+			AND `loading_barang`.`is_deleted` = 0 
+			AND `varian`.`id_varian`= 1 
 			GROUP BY `detail_loading`.`id_varian` , YEAR(loading_barang.tgl_loading ) ,MONTH(loading_barang.tgl_loading)";
 			$result = $this->db->query($sql);
 			$data= $result->result_array();
 			print_r($this->db->last_query()); 
 			return $data;
 		}
+
+		// function ambil_data_peramalan($tgl_input , $list_id_varian)
+		// {
+			
+
+		// 	$sql = "SELECT `detail_loading`.`id_detail_loading`, `produk`.`nama_produk`, `varian`.`jenis_varian`, sum(detail_loading.jumlah_pesanan) as total ,
+		// 	YEAR(loading_barang.tgl_loading) as year , MONTH(loading_barang.tgl_loading) as month
+		// 	FROM `loading_barang` 
+		// 	JOIN `detail_loading` ON `detail_loading`.`id_loading`=`loading_barang`.`id_loading` 
+		// 	JOIN `varian` ON `varian`.`id_varian`=`detail_loading`.`id_varian` 
+		// 	JOIN `produk` ON `produk`.`id_produk`=`varian`.`id_produk` 
+		// 	JOIN `wilayah_distributor` ON `wilayah_distributor`.`id_wilayah_distributor`=`loading_barang`.`id_wilayah_distributor` 
+		// 	WHERE loading_barang.tgl_loading 
+		// 	BETWEEN DATE_ADD('$tgl_input', INTERVAL -11 MONTH) AND '$tgl_input'
+		// 	AND `loading_barang`.`id_wilayah_distributor` = '1' AND `loading_barang`.`is_deleted` = 0 
+		// 	AND `varian`.`id_varian`= $list_id_varian
+		// 	GROUP BY `detail_loading`.`id_varian` , YEAR(loading_barang.tgl_loading ) ,MONTH(loading_barang.tgl_loading)";
+		// 	$result = $this->db->query($sql);
+		// 	$data= $result->result_array();
+		// 	print_r($this->db->last_query()); 
+		// 	return $data;
+		// }
 
 		//AKSI LOG
 		function ambil_data_log_varian ($where)

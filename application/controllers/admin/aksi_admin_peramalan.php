@@ -2,6 +2,14 @@
 
 class Aksi_Admin_Peramalan extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        if(!$this->session->userdata('username'))
+        {
+            redirect('login');
+        }
+    }
     function index()
     {        
     	redirect('admin/aksi_admin_peramalan/tampil_peramalan');
@@ -48,34 +56,45 @@ class Aksi_Admin_Peramalan extends CI_Controller
         if(!empty($list_bulan))
         {
             $tgl_input = $list_tahun . "-" . $list_bulan . "-"  . "1";
+            if($list_bulan<10)
+            {
+                $tgl_calculated = $list_tahun . "0" . ($list_bulan-1) ;
+            }
+            else
+            {
+                $tgl_calculated = $list_tahun .  ($list_bulan-1) ;
+            }
+                        
         }    
         else
         {
             $tgl_input = "2030-7-1";
+            $tgl_calculated = "203007";
             $list_id_varian = 1;
         }
 
         
 
         // echo $tgl_input;
-        $ambil_data['data_peramalan'] = $this->model_data->ambil_data_peramalan($tgl_input , $list_id_varian);
+        $ambil_data['data_peramalan'] = $this->model_data->ambil_data_peramalan($tgl_input , $list_id_varian , $tgl_calculated);
         $hitung_data_peramalan = count($ambil_data['data_peramalan']);
         
-        if($hitung_data_peramalan == 8)
+        if($hitung_data_peramalan == 20)
         {
-            $ambil_data['nilai_x'] = [-3,-2,-1,0,1,2,3,0];
+            $ambil_data['nilai_x'] = [-19,-17,-15,-13,-11,-9,-7,-5,-3,-1,1,3,5,7,9,11,13,15,17,19];
         }
-        else if($hitung_data_peramalan == 7)
-        {
-            $ambil_data['nilai_x'] = [-3,-2,-1,0,1,2,3];
-        }
-        else
-        {
-            $ambil_data['nilai_x'] = [1,1];
-        }
+        // else if($hitung_data_peramalan == 11)
+        // {
+        //     $ambil_data['nilai_x'] = [-5,-4,-3,-2,-1,0,1,2,3,4,5];
+        // }
+        // else
+        // {
+        //     $ambil_data['nilai_x'] = [1,1];
+        // }
 
         $this->load->view('admin/v_admin_side_navbar');        
-        $this->load->view('admin/v_admin_top_navbar');                 
+        $this->load->view('admin/v_admin_top_navbar');              
+        // print_r($ambil_data['nilai_x'])   ;
         $this->load->view('admin/data_admin/v_admin_data_peramalan' , $ambil_data);
         
     }

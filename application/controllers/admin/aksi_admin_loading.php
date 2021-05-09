@@ -2,6 +2,15 @@
 
 class Aksi_Admin_Loading extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        if(!$this->session->userdata('username'))
+        {
+            redirect('login');
+        }
+    }
+    
     function index()
     {        
     	redirect('admin/aksi_admin_loading/tampil_loading');

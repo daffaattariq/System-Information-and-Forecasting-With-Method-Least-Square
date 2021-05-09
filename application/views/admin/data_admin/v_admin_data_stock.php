@@ -12,7 +12,11 @@
   <link href="<?php echo base_url();?>assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url();?>assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url();?>assets/admin/css/ruang-admin.min.css" rel="stylesheet">
-  <link href="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <!-- <link href="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    
 </head>
 
 <body id="page-top">
@@ -39,7 +43,14 @@
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+
+                <?php if ($this->session->flashdata('error')) {?>
+                  <div class="alert alert-danger" role="alert">
+                  <?php echo $this->session->flashdata('error');?>
+                  </div>
+                  <?php }?>
+
+                  <table class="table align-items-center table-flush table-hover" id="dataTable">
                     <thead class="thead-light">
                       <tr>
                         <th>Number</th>                        
@@ -174,16 +185,38 @@
   <script src="<?php echo base_url();?>assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="<?php echo base_url();?>assets/admin/js/ruang-admin.min.js"></script>
   <!-- Page level plugins -->
-  <script src="<?php echo base_url();?>assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <!-- <script src="<?php echo base_url();?>assets/admin/vendor/js/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url();?>assets/admin/vendor/js/datatables/dataTables.bootstrap4.min.js"></script> -->
+                          <!-- UNTUK EXCEL DAN PDF -->
+<!-- data tables -->
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="../assets/vendor/datatables/js/dataTables.bootstrap4.min.js"></script> -->
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url();?>assets/vendor/datatables/js/buttons.bootstrap4.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>  
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
   <!-- Page level custom scripts -->
-  <script>
-    $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
+  <script type="text/javascript"> 
+    $(document).ready(function() {
+    $('#dataTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+          {
+            extend: 'excelHtml5',
+            title: 'Data Stock'
+          },
+          {
+            extend: 'pdfHtml5',
+            title: 'Data Stock'
+          }
+        ]
+    } )
+    } );                        
   </script>
+                        
 
 </body>
 

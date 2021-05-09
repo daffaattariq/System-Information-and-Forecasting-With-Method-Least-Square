@@ -38,7 +38,15 @@
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
-                <div class="table-responsive p-3">
+                <div class="table-responsive p-3">   
+
+                
+                <?php if ($this->session->flashdata('error')) {?>
+                  <div class="alert alert-danger" role="alert">
+                  <?php echo $this->session->flashdata('error');?>
+                
+              <?php }?>
+                           
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
@@ -105,17 +113,18 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalCenterTitle">Add Varian</h5>
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Add Sales</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                 
+                
                 <form action="<?php echo base_url('admin/aksi_admin_sales/tambah_sales') ?>" method="post">
                     
                     <div class="form-group">
-                      <input type="text" class="form-control" id="exampleFormControlInput1"
+                      <input type="text" class="form-control" id="nama_sales"
                         placeholder="nama sales"required="" name="nama_sales" >
                     </div>
                    
