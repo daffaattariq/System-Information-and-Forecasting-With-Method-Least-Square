@@ -40,9 +40,24 @@
                 
                 <div class="table-responsive p-3">
                 <br>
-
-                <form action="<?php echo base_url('admin/aksi_admin_peramalan/tampil_peramalan') ?>" method="post">
                 
+                <form action=
+                "<?php 
+                if($this->session->userdata('id_wilayah_distributor') != 5)
+                {
+                echo base_url('admin/aksi_admin_peramalan/tampil_peramalan')
+                 ?>
+                 <?php
+                }
+                else
+                {
+                  echo base_url('admin/aksi_admin_peramalan/tampil_peramalan')?>?id_wilayah_distributor=<?php echo $id_wilayah_distributor
+                  ?>
+                  <?php
+                }
+                  ?>"
+                 method="post">
+
                 <div class="form-group">
                       <label for="exampleFormControlSelect1">Select Varian</label>
                       <select class="form-control" id="exampleFormControlSelect1" name="list_id_varian">
@@ -50,11 +65,26 @@
   
                           foreach($varian as $data_varian)
                           {
+                            if($list_id_varian == $data_varian['id_varian']) 
+                            {
+                              // KIRIM FORECAST
+
+                              // KIRIM FORECAST
                         ?>
 
-                          <option value ="<?php echo $data_varian['id_varian'] ?>"><?php echo $data_varian['jenis_varian'] ?></option>
-
+                              <option selected="selected" value ="<?php echo $data_varian['id_varian'] ?>"><?php echo $data_varian['jenis_varian'] ?></option>                          
+                        
                         <?php
+                            }
+                            else
+                            {
+                              // KIRIM FORECAST
+
+                              // KIRIM FORECAST
+                        ?>
+                              <option value ="<?php echo $data_varian['id_varian'] ?>"><?php echo $data_varian['jenis_varian'] ?></option>
+                              <?php
+                            }
                           }
                         ?>               
                       </select>
@@ -133,6 +163,7 @@
                         $total_nilai_x4 = 0;
                         $total_nilai_xy = 0;
                         $total_nilai_x2y = 0;
+                        $n = 9; //jumlah n
 
                         $count_jumlah_data = count($nilai_x);
                         // echo "<pre>";
@@ -149,7 +180,7 @@
                             <td><?php echo $data_peramalan['total'] ?></td> 
 
                             <?php
-                              if($count_jumlah_data > 19)
+                              if($count_jumlah_data == $n)
                               {
                             ?>
                               <!-- nilai x -->
@@ -167,7 +198,7 @@
                             ?>
                         </tr>
                       <?php
-                          if($count_jumlah_data > 19)
+                          if($count_jumlah_data == $n)
                           {
                             $total_nilai_y = $total_nilai_y + $data_peramalan['total'];
                             $total_nilai_x2 = $total_nilai_x2 + $nilai_x[$number-1]*$nilai_x[$number-1];
@@ -178,12 +209,12 @@
                           }
                         }//tutup foreach
 
-                        if($count_jumlah_data > 19)
-                        {
-                          // $total_nilai_y = $total_nilai_y - $total_8;
-                        }
+                        // if($count_jumlah_data > 7)
+                        // {
+                        //   // $total_nilai_y = $total_nilai_y - $total_8;
+                        // }
 
-                        if($count_jumlah_data > 19)
+                        if($count_jumlah_data == $n)
                         {
                       ?>
                       <tr>
@@ -196,36 +227,104 @@
                       <td><?php echo $total_nilai_x4 ?></td>
                       <td><?php echo $total_nilai_xy ?></td>
                       <td><?php echo $total_nilai_x2y ?></td>
-                      <td>-</td>
                     </tbody>
                   </table>
                   <br>
                   <br>
                   <?php
-                  $n = 11;
-                  $x_indeks = 6; //4
-                        $a = (($total_nilai_x4*$total_nilai_y)-($total_nilai_x2*$total_nilai_x2y)) / ($n*($total_nilai_x4)-$n*($total_nilai_x2*$total_nilai_x2));
+                  
+                  $x_indeks = 5; //4
+                  
+                        $a = (($total_nilai_x4*$total_nilai_y)-($total_nilai_x2*$total_nilai_x2y)) / ($n*($total_nilai_x4)-($total_nilai_x2*$total_nilai_x2));
                         $b = $total_nilai_xy/$total_nilai_x2;
                         $c = (($n*$total_nilai_x2y) - ($total_nilai_x2*$total_nilai_y)) / (($n*$total_nilai_x4) - ($total_nilai_x2*$total_nilai_x2));
 
                         $hasil =ceil($a+($b*$x_indeks)+($c*$x_indeks*$x_indeks));
+                        if($hasil < 0)
+                        {
+                          $hasil = $hasil * -1;
+                        }
                   ?>
-                  <h2>PERHITUNGAN</h2>
-                  <br>
-                  Nilai A = <?php echo $a?>
-                  <br>
-                  Nilai B = <?php echo $b?>
-                  <br>
-                  Nilai C = <?php echo $c?>
-                  <br>
-
-                  HASIL
-                  <br>
-                  HASIL PERAMALAN = <?php echo $hasil?>
+                  <center><h2>HASIL</h2></center>
+                
 
                   <?php
                         }
                   ?>
+
+                  <!-- TABLE HASIL -->
+                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Nilai A</th>                                                   
+                        <th>Nilai B</th>                   
+                        <th>Nilai C</th>    
+                        <th>HASIL</th>    
+                      </tr>
+                    </thead>
+                   <!--  <tfoot>
+                    <tr>
+                        <th>Id Employee</th>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Division</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                      </tr>
+                    </tfoot> -->
+                    <tbody>
+                     
+                        <tr>
+                        <?php
+                         if($count_jumlah_data == $n)
+                         {
+                        ?>
+                            <td><?php echo $a ?></td>                            
+                            <td><?php echo $b ?></td>
+                            <td><?php echo $c ?></td>   
+                            <td><?php echo $hasil ?></td>  
+
+                            <!-- TAMBAHH FORECASTTTT -->
+                            <tr>
+                            <form action= <?php echo base_url('admin/aksi_admin_peramalan/eksekusi')?>?list_id_varian=<?php echo $list_id_varian?> method = "post">
+                            
+                            <td><input type="text" name="tgl_calculated_input" value=<?php echo $tgl_calculated_frc ?>></td>  
+                            <td><input type="text" name="hasil" value=<?php echo $hasil ?>></td>  
+                            
+                            <!-- AMBIL NILAI ACTUAL -->
+                            <?php
+                            $actual = 0;
+                                foreach($nilai_actual as  $nilai_actual)
+                                {
+                                  $actual = $nilai_actual['total'];
+                            ?>
+                                <td><input type="text" name="actual" value=<?php echo $nilai_actual['total'] ?>></td>  
+                            <?php
+                                }
+                            ?>
+
+                            <!-- HITUNG MAPE -->
+                            <?php
+                                $row_abs = $actual - $hasil;
+                                if($row_abs < 1)
+                                {
+                                  $row_abs = $row_abs*-1;
+                                }
+                                $row_3 = $row_abs/$actual;
+                                print($row_3);                                
+                                $nilai_mape = round($row_3/$n * 100 ,1);
+                            ?>
+                            <td><input type="text" name="mape" value=<?php echo $nilai_mape ?>></td>  
+                            <button type="submit">TAMBAH FORECAST</button>
+                            </form> 
+                            <!-- TAMBAHH FORECASTTTT -->
+                        <?php
+                         }
+                        ?>
+                        </tr>
+                     
+                    </tbody>
+                  </table>
 
                 </div>
               </div>

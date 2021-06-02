@@ -39,8 +39,7 @@
                       <tr>
                         <th>Number</th>
                         <th>Tanggal Aksi</th>                        
-                        <th>Tipe Varian</th>                       
-                        <th>Stock Varian</th>
+                        <th>Tipe Varian</th>                                               
                         <th>Jenis Varian</th>
                         <th>Wilayah</th>
                         <th>Action</th>
@@ -68,8 +67,7 @@
                         <tr>
                             <td><?php echo $number ?></td>                            
                             <td><?php echo $data_stock['tgl_aksi'] ?></td>
-                            <td><?php echo $data_stock['jenis_varian'] ?></td>
-                            <td><?php echo $data_stock['stock_varian'] ?></td>
+                            <td><?php echo $data_stock['jenis_varian'] ?></td>                            
                             <td><?php echo $data_stock['nama_produk'] ?></td>
                             <td><?php echo $data_stock['nama_wilayah'] ?></td>
                             <td><?php echo $data_stock['aksi'] ?></td>

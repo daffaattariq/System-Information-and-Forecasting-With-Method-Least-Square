@@ -13,106 +13,59 @@
   <link href="<?php echo base_url();?>assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url();?>assets/admin/css/ruang-admin.min.css" rel="stylesheet">
   <link href="<?php echo base_url();?>assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <!-- chart -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
 </head>
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Data Tables All</h1>
+            <h1 class="h3 mb-0 text-gray-800">Data Chart Tahun <?php echo date("Y") ?></h1>
           
           </div>
 
-          <div class="row mb-3">
-            <!-- Earnings (Monthly) Card Example -->
-            
-            <div class="col-xl-2 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body" href="index.html">
-                  <a href="<?php echo base_url('admin/admin/list_data_case')?>">
-                  <div class="row align-items-center">
-                    <div class="col mr-2">
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Data Loading</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">Preview</div>
-                    
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-warning"></i>        
-                    </div>
-                  </div>
-                </a>
-                </div>
-              </div>
-            </div>
- 
-            <!-- New User Card Example -->
-            
-            <div class="col-xl-2 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/admin/list_data_comment')?>">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">              
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Data Detail Loading</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">Preview</div>
-                    
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-secondary"></i>
-                    </div>
-                  </div>
-                  </a>
-                </div>
-              </div>
-            </div>
           
-                     <!-- Earnings (Annual) Card Example -->
-            <div class="col-xl-2 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/admin/list_data_employee')?>">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">              
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Data Penjualan</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">Preview</div>
-                    
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
-                    </div>
-                  </div>
-                </a>
-                </div>
-              </div>
-            </div>
-            
 
-            <div class="col-xl-2 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <a href="<?php echo base_url('admin/admin/list_data_log')?>">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">              
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Data Stock</div>
-                      <div class="h6 mb-0 font-weight-bold text-gray-800">Preview</div>
-                    
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-secondary"></i>
-                    </div>
-                  </div>
-                  </a>
-                </div>
-              </div>
-            </div>
+          <!-- CHART -->
+          <?php
+          // var_dump($data_chart);die();
+              for($n=0; $n<6; $n++)
+              {
+                 $chart = $data_chart[$n];
+                
+          ?>
 
-               
+            <div id="myfirstchart<?php echo $n ?>" style="height: 250px;"></div>
+            <script>
+             Morris.Line({
+              element: 'myfirstchart<?php echo $n ?>' ,              
+              data: <?php echo $chart; ?>,                        
+              xkey: 'id_chart',              
+              ykeys: ['nilai_actual' , 'nilai_prediksi'],              
+              labels: ['Actual' , 'Prediksi']
+
+            // element: 'myfirstchart',
+            // data: [
+            //   { year: '2008', value: 20 },
+            //   { year: '2009', value: 10 },
+            //   { year: '2010', value: 5 },
+            //   { year: '2011', value: 5 },
+            //   { year: '2012', value: 20 }
+            // ],
+            // xkey: 'year',
+            // ykeys: ['value'],
+            // labels: ['Value']
+            });
+            </script>
+            <?php
+              }
+            ?>
+
+          </div>
 
 
             
@@ -135,13 +88,15 @@
   <script src="vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+  
+
   <!-- Page level custom scripts -->
-  <script>
+  <!-- <script>
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
-  </script>
+  </script> -->
 
 </body>
 

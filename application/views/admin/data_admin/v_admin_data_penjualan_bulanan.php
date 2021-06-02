@@ -29,7 +29,22 @@
                 <div class="table-responsive p-3">
                 <br>
 
-                <form action="<?php echo base_url('admin/aksi_admin_penjualan/tampil_bulanan_penjualan') ?>" method="post">
+                <form action=
+                "<?php 
+                if($this->session->userdata('id_wilayah_distributor') != 5)
+                {
+                echo base_url('admin/aksi_admin_penjualan/tampil_bulanan_penjualan')
+                 ?>
+                 <?php
+                }
+                else
+                {
+                  echo base_url('admin/aksi_admin_penjualan/tampil_bulanan_penjualan')?>?id_wilayah_distributor=<?php echo $id_wilayah_distributor
+                  ?>
+                  <?php
+                }
+                  ?>"
+                 method="post">
                 
                 <br>
                 <div class="form-group">

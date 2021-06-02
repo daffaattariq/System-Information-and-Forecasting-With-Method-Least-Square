@@ -28,13 +28,19 @@
             <h1 class="h3 mb-0 text-gray-800">DataTables Stock  </h1>
            
             <ol class="breadcrumb">
-          
-             <button  class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#tambahmembers" id="#modalCenter" >
-                    <span class="icon text-white-50">
-                          <i class="fas fa-arrow-right"></i>
-                    </span>
-                    <span class="text">Added Varian </span>
-                </button>
+              <?php
+                  if($this->session->userdata('id_wilayah_distributor') != 5)
+                  {
+              ?>
+                    <button  class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#tambahmembers" id="#modalCenter" >
+                            <span class="icon text-white-50">
+                                  <i class="fas fa-arrow-right"></i>
+                            </span>
+                            <span class="text">Added Varian </span>
+                    </button>
+              <?php
+                  }
+              ?>
           </div>
 
           <!-- Row -->
@@ -59,7 +65,14 @@
                         <th>Jenis Varian</th>
                         <th>Harga Varian</th>
                         <th>Wilayah</th>
+                        <?php
+                          if($this->session->userdata('id_wilayah_distributor') != 5)
+                          {
+                        ?>
                         <th>Action</th>
+                        <?php
+                          }
+                        ?>
                       </tr>
                     </thead>
                    <!--  <tfoot>
@@ -89,12 +102,19 @@
                             <td><?php echo $data_stock['harga_varian'] ?></td>
                             <td><?php echo $data_stock['nama_wilayah'] ?></td>
 
+                            <?php
+                                if($this->session->userdata('id_wilayah_distributor') != 5)
+                                {
+                            ?>
                             <td>
                                 <a href="<?php echo base_url('admin/aksi_admin_varian/tampil_edit_stock')?>?id_varian=<?php echo $data_stock['id_varian']?>" 
                                 class="btn btn-dark"  ><i class="fas fa-edit"></i></a>
                                 <a href="<?php echo base_url('admin/aksi_admin_varian/hapus_varian')?>?id_varian=<?php echo $data_stock['id_varian'] ?>&id_wilayah_distributor=<?php echo $data_stock['id_wilayah_distributor']?>" 
                                 class="btn btn-danger" ><i class="fas fa-trash"></i></a>
                             </td>
+                            <?php
+                                }
+                            ?>
                         </tr>
                       <?php
                         }

@@ -49,11 +49,22 @@
               <div id="collapseBootstrap<?php echo $hitung ?>" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                   
-                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_varian') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Product</a>
-                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_sales') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Sales</a>     
+                  <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_varian/tampil_data_stock') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Product</a>
+                  <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_sales/tampil_sales') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Sales</a>     
+                  <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Penjualan</a>     
+                  <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Penjualan Varian</a>     
+                  <?php
+                  if($hitung !=6)
+                  {
+                    ?>
+                        <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_peramalan/tampil_peramalan') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Peramalan</a>     
+                    <?php
+                  }
+                  ?>
+                  
                   <!-- LOG -->
-                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_log_varian') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Log Product</a>
-                  <a class="collapse-item" href="<?php echo base_url('pusat/data_pusat/aksi_pusat_log_sales') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Log Sales</a>     
+                  <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_varian/tampil_data_stock_log') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Log Product</a>
+                  <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_sales/tampil_data_sales_log') ?>?id_wilayah_distributor=<?php echo $wilayah['id_wilayah_distributor'] ?>" >Log Sales</a>     
 
                 </div>
               </div>

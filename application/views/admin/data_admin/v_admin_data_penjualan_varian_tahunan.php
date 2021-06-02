@@ -16,6 +16,7 @@
 
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    
 </head>
 
@@ -29,7 +30,22 @@
                 <div class="table-responsive p-3">
                 <br>
 
-                <form action="<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian_tahunan') ?>" method="post">
+                <form action=
+                "<?php 
+                if($this->session->userdata('id_wilayah_distributor') != 5)
+                {
+                echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian_tahunan')
+                 ?>
+                 <?php
+                }
+                else
+                {
+                  echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian_tahunan')?>?id_wilayah_distributor=<?php echo $id_wilayah_distributor
+                  ?>
+                  <?php
+                }
+                  ?>"
+                 method="post">
                 
                 <br>
                 
@@ -88,11 +104,71 @@
                       ?>
                     </tbody>
                   </table>
+                 
                 </div>
               </div>
             </div>
           </div>
           <!--Row-->
+          
+          <div class="row">
+					<div class="col-12">
+						<div class="card card-chart">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-sm-6 text-left">
+										<h2 class="card-title">Grafik</h2>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+							
+								<hr style="background-color:black;">
+								<canvas id="myChartAktualVSPrediksi" width="400" height="200"></canvas>
+								<script>
+									var ctx = document.getElementById('myChartAktualVSPrediksi').getContext('2d');
+									var myChart = new Chart(ctx, {
+										type: 'line',
+										data: {
+											labels: [<?php
+														$jmlp = count($hp)+1;
+														$in = 1;
+														foreach ($data_aktual as $d) {
+															echo "'ke - ".$in."' ,";
+															$in++;
+														}
+													?>],
+											datasets: [{
+												label: 'Data Aktual',
+												data: [<?php
+														foreach ($data_aktual as $da) {
+															echo round($da['total'], 2).', ';
+														}
+													?>],
+												backgroundColor: [
+													'rgba(0,0,0,1)'
+												],
+												borderColor: [
+													'rgba(0,0,0 1)'
+												],
+												tension: 0.4,
+												borderWidth: 1
+											}]
+										},
+										options: {
+											scales: {
+												y: {
+													beginAtZero: false
+												}
+											}
+										}
+									});
+								</script>
+								
+							</div>
+						</div>
+					</div>
+				</div>
 
         </div>
         <!---Container Fluid-->
@@ -125,6 +201,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>  
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <!-- chart -->
+    <script src="<?php echo base_url() ?>assets/admin/js/chartjs.min.js"></script>
   <!-- Page level custom scripts -->
   <script type="text/javascript"> 
     $(document).ready(function() {

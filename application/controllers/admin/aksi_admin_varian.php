@@ -27,6 +27,8 @@ class Aksi_Admin_Varian extends CI_Controller
 
     function tampil_data_stock()
     {
+        if($this->session->userdata('id_wilayah_distributor') != 5)
+        {
 
         $id_wilayah_distributor = $this->session->userdata('id_wilayah_distributor');
                 
@@ -50,6 +52,49 @@ class Aksi_Admin_Varian extends CI_Controller
         $this->load->view('admin/v_admin_side_navbar');        
         $this->load->view('admin/v_admin_top_navbar');         
         $this->load->view('admin/data_admin/v_admin_data_stock' , $ambil_data);
+        }
+
+        //PUSAT
+        else
+        {
+        
+        $data_wilayah['wilayah'] = $this->model_data_pusat->ambil_data('wilayah_distributor');
+                      
+        $id_wilayah_distributor = $this->input->get('id_wilayah_distributor');
+
+        //AMBIL DARI CODE AKSI ADMIN VARIAN CONTROLLER
+
+        if($id_wilayah_distributor != 6)
+        {
+            $where = array(
+                'varian.id_wilayah_distributor' => $id_wilayah_distributor,
+                'is_deleted' => 0
+            );
+        }
+        else
+        {
+            $where = array(
+                'is_deleted' => 0
+            );
+        }
+       
+                   
+            $ambil_data['data'] = $this->model_data->ambil_data_varian($where);
+            $ambil_data['produk'] = $this->model_data->ambil_data_result('produk');
+    
+            if(!empty($ambil_data['data'][0]['id_wilayah_distributor']))
+            {
+                // $ambil_data['id_wilayah_distributor'] = $ambil_data['data'][0]['id_wilayah_distributor'];
+                $ambil_data['nama_wilayah'] = $ambil_data['data'][0]['nama_wilayah'];
+            }
+
+        //END
+
+        $this->load->view('pusat/v_pusat_side_navbar'  , $data_wilayah);        
+        $this->load->view('pusat/v_pusat_top_navbar');         
+        $this->load->view('admin/data_admin/v_admin_data_stock' , $ambil_data);
+
+        }
     }
 
     function tambah_varian()
@@ -162,6 +207,8 @@ class Aksi_Admin_Varian extends CI_Controller
     //FUNCTION LOG
     function tampil_data_stock_log()
     {
+        if($this->session->userdata('id_wilayah_distributor') != 5)
+        {
 
         $id_wilayah_distributor = $this->session->userdata('id_wilayah_distributor');
                 
@@ -184,6 +231,49 @@ class Aksi_Admin_Varian extends CI_Controller
         $this->load->view('admin/v_admin_side_navbar');        
         $this->load->view('admin/v_admin_top_navbar');         
         $this->load->view('admin/data_admin/data_log_admin/v_log_admin_data_stock' , $ambil_data);
+        }
+
+        //PUSAT
+
+        else
+        {
+        $data_wilayah['wilayah'] = $this->model_data_pusat->ambil_data('wilayah_distributor');
+                      
+        $id_wilayah_distributor = $this->input->get('id_wilayah_distributor');
+
+        //AMBIL DARI CODE AKSI ADMIN LOG VARIAN
+                
+
+        if($id_wilayah_distributor != 6)
+        {
+            $where = array(
+                'varian.id_wilayah_distributor' => $id_wilayah_distributor
+            );
+            $ambil_data['data'] = $this->model_data->ambil_data_log_varian($where);
+        }
+
+        else
+        {
+            $ambil_data['data'] = $this->model_data->ambil_data_log_varian_all();
+        }
+               
+       
+        $ambil_data['produk'] = $this->model_data->ambil_data_result('produk');
+
+        if(!empty($ambil_data['data'][0]['id_wilayah_distributor']))
+        {
+            // $ambil_data['id_wilayah_distributor'] = $ambil_data['data'][0]['id_wilayah_distributor'];
+            $ambil_data['nama_wilayah'] = $ambil_data['data'][0]['nama_wilayah'];
+        }
+        
+        // print($ambil_data['produk'][0]['id_produk']);die();
+
+        //tampil
+        
+        $this->load->view('pusat/v_pusat_side_navbar'  , $data_wilayah);        
+        $this->load->view('pusat/v_pusat_top_navbar');               
+        $this->load->view('admin/data_admin/data_log_admin/v_log_admin_data_stock' , $ambil_data);
+        }
     }
 
     //FUNCTION RECENT DELETED

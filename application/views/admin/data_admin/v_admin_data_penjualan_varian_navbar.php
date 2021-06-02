@@ -29,8 +29,23 @@
           
           
           <br>
-          <a href = "<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian') ?>"><button type="button" class="btn btn-secondary">Bulanan</button></a>
+          <?php
+            if($this->session->userdata('id_wilayah_distributor') != 5)
+            {
+          ?>
+            <a href = "<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian') ?>"><button type="button" class="btn btn-secondary">Bulanan</button></a>
           <a href = "<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian_tahunan') ?>"><button type="button" class="btn btn-secondary">Tahunan</button></a>
+          <?php
+            } 
+            else
+            {
+          ?>
+            <a href = "<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian')?>?id_wilayah_distributor=<?php echo $id_wilayah_distributor ?>"><button type="button" class="btn btn-secondary">Bulanan</button></a>
+            <a href = "<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian_tahunan')?>?id_wilayah_distributor=<?php echo $id_wilayah_distributor ?>"><button type="button" class="btn btn-secondary">Tahunan</button></a>            
+          <?php    
+            }
+          ?>
+          
 
          
     

@@ -28,8 +28,25 @@
                 
                 <div class="table-responsive p-3">
                 <br>
+                
 
-                <form action="<?php echo base_url('admin/aksi_admin_penjualan/aksi_harian_penjualan') ?>" method="post">
+                <form action=
+                "<?php 
+                if($this->session->userdata('id_wilayah_distributor') != 5)
+                {
+                echo base_url('admin/aksi_admin_penjualan/aksi_harian_penjualan')
+                 ?>
+                 <?php
+                }
+                else
+                {
+                  echo base_url('admin/aksi_admin_penjualan/aksi_harian_penjualan')?>?id_wilayah_distributor=<?php echo $id_wilayah_distributor
+                  ?>
+                  <?php
+                }
+                  ?>"
+                 method="post">
+                 
                 <label>Pilih Tanggal</label>
                 <br>
                 <?php

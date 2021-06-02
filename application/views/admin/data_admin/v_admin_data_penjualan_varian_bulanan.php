@@ -29,7 +29,22 @@
                 <div class="table-responsive p-3">
                 <br>
 
-                <form action="<?php echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian') ?>" method="post">
+                <form action=
+                "<?php 
+                if($this->session->userdata('id_wilayah_distributor') != 5)
+                {
+                echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian')
+                 ?>
+                 <?php
+                }
+                else
+                {
+                  echo base_url('admin/aksi_admin_penjualan/tampil_penjualan_varian')?>?id_wilayah_distributor=<?php echo $id_wilayah_distributor
+                  ?>
+                  <?php
+                }
+                  ?>"
+                 method="post">
                 
                 <br>
                 <div class="form-group">
@@ -87,6 +102,7 @@
                         <th>Number</th>                                                
                         <th>Nama Produk</th>                                                                                        
                         <th>Jenis Varian</th> 
+                        <th>Wilayah</th> 
                         <th>Total</th> 
                                                                
                       </tr>
@@ -104,6 +120,7 @@
                             <td><?php echo $number ?></td>                                                        
                             <td><?php echo $data_detail_loading['nama_produk'] ?></td>  
                             <td><?php echo $data_detail_loading['jenis_varian'] ?></td>                                                        
+                            <td><?php echo $data_detail_loading['nama_wilayah'] ?></td> 
                             <td><?php echo $data_detail_loading['total'] ?></td>
                             
                            

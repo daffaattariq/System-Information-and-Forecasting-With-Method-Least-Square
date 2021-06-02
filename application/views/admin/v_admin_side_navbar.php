@@ -110,6 +110,8 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                   
                 <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_peramalan') ?>?id_wilayah_distributor=<?php echo $this->session->userdata('id_wilayah_distributor') ?>" > Data Peramalan</a>                
+                <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_peramalan/aksi_peramalan') ?>?id_wilayah_distributor=<?php echo $this->session->userdata('id_wilayah_distributor') ?>" > Data Peramalan Bulan Depan</a>                
+                <a class="collapse-item" href="<?php echo base_url('admin/aksi_admin_peramalan/generate_peramalan') ?>?id_wilayah_distributor=<?php echo $this->session->userdata('id_wilayah_distributor') ?>" > GENERATE</a>                
 
                 </div>
               </div>

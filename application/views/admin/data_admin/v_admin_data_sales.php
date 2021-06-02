@@ -24,13 +24,19 @@
             <h1 class="h3 mb-0 text-gray-800">DataTables Sales   </h1>
            
             <ol class="breadcrumb">
-          
+            <?php
+             if($this->session->userdata('id_wilayah_distributor') != 5)
+             {
+            ?>
              <button  class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#tambahmembers" id="#modalCenter" >
                     <span class="icon text-white-50">
                           <i class="fas fa-arrow-right"></i>
                     </span>
                     <span class="text">Added Sales </span>
                 </button>
+                <?php
+             }
+                ?>
           </div>
 
           <!-- Row -->
@@ -52,8 +58,15 @@
                       <tr>
                         <th>Number</th>                                                   
                         <th>Nama Sales</th>                   
-                        <th>Wilayah</th>                                                                        
+                        <th>Wilayah</th>    
+                        <?php
+                               if($this->session->userdata('id_wilayah_distributor') != 5)
+                               {
+                            ?>                                                                    
                         <th>Action</th>                        
+                        <?php
+                               }
+                               ?>
                       </tr>
                     </thead>
                    <!--  <tfoot>
@@ -78,13 +91,20 @@
                         <tr>
                             <td><?php echo $number ?></td>                            
                             <td><?php echo $data_sales['nama_sales'] ?></td>
-                            <td><?php echo $data_sales['nama_wilayah'] ?></td>                                                         
+                            <td><?php echo $data_sales['nama_wilayah'] ?></td>   
+                            <?php
+                               if($this->session->userdata('id_wilayah_distributor') != 5)
+                               {
+                            ?>
                             <td>
                                 <a href="<?php echo base_url('admin/aksi_admin_sales/tampil_edit_sales')?>?id_sales=<?php echo $data_sales['id_sales']?>" 
                                 class="btn btn-dark"  ><i class="fas fa-edit"></i></a>
                                 <a href="<?php echo base_url('admin/aksi_admin_sales/hapus_sales')?>?id_sales=<?php echo $data_sales['id_sales'] ?>" 
                                 class="btn btn-danger" ><i class="fas fa-trash"></i></a>
                             </td>
+                            <?php
+                               }
+                               ?>
                         </tr>
                       <?php
                         }
